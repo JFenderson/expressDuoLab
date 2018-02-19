@@ -1,6 +1,8 @@
 const fs = require('fs');
 let chirps = { nextid: 0 };
 
+  
+
 if(fs.existsSync('chirps.json')) {
     chirps = JSON.parse(fs.readFileSync('chirps.json'));
 }
@@ -14,7 +16,7 @@ let getChirp = id => {
 }
 
 let createChirp = (chirp) => {
-    chirps[chirps.nextid++] = chirp;
+    chirps[chirps] = chirp;
     writeChirps();
 };
 

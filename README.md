@@ -6,7 +6,7 @@ Setup an API with the project structure like:
 /routes
 index.js
 chirps.js
-server.j
+server.js
 chirpsstore.js (file provided in this lab)
 In routes/chirps.js, create GET, POST, PUT, DELETE methods on a router that is created in chirps.js
 Import chirpsstore, and use it to read and write chirps to the json file

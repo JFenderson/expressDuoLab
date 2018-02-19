@@ -1,0 +1,46 @@
+body{
+    margin: 0 auto;
+
+}
+h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 2em;
+    text-align: center;
+    text-transform: uppercase;
+
+}
+
+h2 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 2em;
+    text-align: center;
+    text-transform: uppercase;
+
+}
+
+
+.inputChirp {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    color: midnightblue;
+    text-align: center;
+
+}
+.chirpBtn {
+    font-size: 1em;
+    background-color: rgb(3, 80, 3);
+    color: rgb(194, 192, 192);
+    justify-content: center;
+}
+
+ul li .edit {
+    display: none;
+}
+
+ul li.edit .edit {
+    display: initial;
+}
+
+ul li.edit .noedit {
+    display: none;
+}

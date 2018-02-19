@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/styles.css">
+    <title>Chirps Express</title>
+</head>
+<body>
+        <h1>Welcome to Chirper!!</h1>
+        <p class="inputChirp">Username: <input type="text" id="chirpUser"></p>
+        <p class="inputChirp">Whats Chirping? <input type="text" name="textarea" id="chirpText"></p>
+        <button id="add-chirp" class="chirpBtn ">Send Chirps</button>
+    
+        <h2>Past Chirps</h2>
+        <ul id="chirps" class="list-group list-group-flush">
+            <template id='chirp-template'>
+                <li data-id = {{id}} class="list-group-item">
+                    <p>
+                        <strong>User:</strong> 
+                        <span class="noedit user">{{user}}</span>
+                        <input class="edit user">
+                    </p>
+                    <p>
+                        <strong>Chirp:</strong>
+                        <span class="noedit">{{chirp}}</span>
+                        <input class="edit chirp">
+                    </p>
+                    <button data-id='{{id}}' class='remove'>X</button>
+                    <button classname="editChirp noedit">Edit</button>
+                    <button classname="saveEdit edit">Save</button>
+                    <button classname="cancelEdit edit">Cancel</button>
+                </li>
+            </template>
+
+        </ul>
+    <div id="dataChirps"></div>
+    
+    <div id="show-data"></div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
+
