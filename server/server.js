@@ -15,10 +15,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname, '../client')));
 
-router.use((req, res, next)=> {
-    console.log('/' + req.method);
-    next();
-});
+// router.use((req, res, next)=> {
+//     console.log('/' + req.method);
+//     next();
+// });
 
 // router.use('/user/:id', (req, res, next) => {
 //     console.log(req.params.id)

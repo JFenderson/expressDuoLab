@@ -2,13 +2,14 @@
 
 
 // $(document).ready(function() {
-// $.getJSON( "../chirps.json", function( data ) {
+// $.getJSON( "/chirps.json", function( data ) {
 //     var items = [];
 //     var text = [];
 //     var html = '';
 //     var showData = $('#show-data');
     
 //     $.each( data, function( key, val ) {
+//         console.log(key);
 //         html += '<div class="dcell">';
 //         html += '<h3 id="'+val.key+'">'+val.user+':</h3>';
 //         html += '<p id="'+val.key+'">'+val.text+':</p>';
@@ -27,16 +28,23 @@ $(function(){
     const $chirps = $('#chirps');
     const $user = $('#chirpUser');
     const $text = $('#chirpText');
+    var text = [];
+    var items = [];
+    var html = '';
+    var showData = $('#show-data');
 
     var chirpTemplate = $('#chirp-template').html();
 
     function addChirp(chirp){
-        $chirps.append(Mustache.render(chirpTemplate, chirp))
+        // $chirps.append(Mustache.render(chirpTemplate, chirp))
         // $chirps.append('' + 
         // "<li>"+
-        // "<p><strong>Username:</strong>" + chirp.user +"</p>"+
-        // "<p><strong>Chirp:</strong>"+ chirp.text +"</p>"+ 
-        // "<button data-id="+ chirp.id +"class='remove'>X</button>"+
+        // "<p classname='chirper'><strong>Username:</strong>" + chirp.user +"</p>"+
+        // "<p classname='chirps'><strong>Chirp:</strong>"+ chirp.text +"</p>"+ 
+        // "<button data-id="+ id +"class='remove'>X</button>"+
+        // "<button data-id="+ id +"classname=editChirp noedit>Edit</button>" +
+        // "<button data-id="+ id +"classname=saveEdit edit>Save</button>" +
+        // "<button data-id="+ id +"classname=cancelEdit edit>Cancel</button>" +
         // "</li>")
     }
 
@@ -44,10 +52,19 @@ $(function(){
         type: 'GET',
         url: "/api/chirps",
         success: function(chirps){
-            $.each(chirps, (i, chirp)=>{
-                console.log(chirp);
-                addChirp(chirp);
-            })
+            $.each(chirps, (id, chirp)=>{ 
+                if(id !== "nextid"){
+                    html += "<li>";
+                    html += "<p class='chirper'><strong>Username:</strong>" +chirp.user +"</p>";
+                    html += "<p class='chirps'><strong>Chirp:</strong>"+chirp.text +"</p>";
+                    html += "<button data-id=" + id +" class='remove'>X</button>";
+                    html += "<button data-id=" + id +" class=editChirp noedit>Edit</button>";
+                    html += "<button data-id=" + id +" class=saveEdit edit>Save</button>";
+                    html += "<button data-id=" + id +" class=cancelEdit edit>Cancel</button>";
+                    html += "</li>";
+                }
+            });
+            $( "#chirps").append(html);
         },
         error: () => {
             alert('error loading chirps')
@@ -62,11 +79,26 @@ $(function(){
 
         $.ajax({
             type: 'POST',
+            traditional: true,
             url: "/api/chirps",
+            async: false,
             data: chirp,
             success: function(newChirp){
-                addChirp(newChirp);
+                // addChirp(newChirp);
+                $.post(chirps, (id, chirp)=>{ 
+                $( "#chirps").append(
+                     "<li>",
+                     "<p class='chirper'><strong>Username:</strong>" +newChirp.user +"</p>",
+                     "<p class='chirps'><strong>Chirp:</strong>"+newChirp.text +"</p>",
+                     "<button data-id=" + id +" class='remove'>X</button>",
+                     "<button data-id=" + id +" class=editChirp noedit>Edit</button>",
+                     "<button data-id=" + id +" class=saveEdit edit>Save</button>",
+                     "<button data-id=" + id +" class=cancelEdit edit>Cancel</button>",
+                     "</li>"
+                )
+            });
             },
+            
             error: () => {
                 alert('error loading chirps')
             }
@@ -152,4 +184,45 @@ $(function(){
 //   });
 
 
+//   $.ajax({
+//     url: "url",
+//     type: 'POST',
+//     dataType: "html",
+//     data:{id:params},
+//     success: function(data, status, xhr) {
+//         if(data==""){
+//             window.location.href="/";
+//         }
+//         else{
+//             BootstrapDialog.show({
+//                 title: "Modal Tital",
+//                 message: function(dialogRef){
+//                     $mydata = $($.parseHTML(data));
+//                     return $mydata;
+//                 },
+//                 onshow: function(dialog){
 
+//             // and css change if need, eg. 
+//              dialog.$modalHeader.css("float","none");
+
+//                 },
+//                 onshown:function(dialog)
+//                 {
+//                    // event after shown
+
+//                 },
+//                 onhide:function(dailog)
+//                 {
+//                    // event on hide
+//                 }
+//             });
+//         }
+
+//     },
+//     statusCode: {
+//         401: function () {
+//             alert("Your session has been expired");
+
+//         }
+//     }
+// });
